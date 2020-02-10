@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="font-medium text-lg mb-4"> {{ question.question_text }} </h1>
+
+  <ul class="mb-5 list-none max-w-md">
+    {% for choice in question.choice_set.all %}
+        <li class="p-2 border border-gray-200">
+          {{ choice.choice_text }}
+          <span class="float-right bg-green-500 rounded-full p-1 text-xs text-white leading-none">
+            {{ choice.votes }} vote{{ choice.votes | pluralize }}
+          </span>
+        </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'polls:index' %}" class="mb-3 no-underline inline-block px-3 py-2 rounded leading-none text-sm font-bold bg-gray-300 hover:bg-gray-400 focus:bg-gray-400 text-gray-800">Back to Polls</a>
+  <a href="{% url 'polls:detail' question.id %}" class="no-underline inline-block px-3 py-2 rounded leading-none text-sm font-bold bg-teal-300 hover:bg-teal-400 focus:bg-teal-400 text-teal-800">Vote Again?</a>
+{% endblock content %}

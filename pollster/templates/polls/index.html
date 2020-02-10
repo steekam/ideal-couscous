@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="p-4">
+  <h1 class="text-center mb-2 uppercase font-medium text-lg">Poll Questions</h1>
+  {% if latest_questions %}
+  <div class="p-2">
+    {% for question in latest_questions %}
+      <div class="p-4 mb-4 border border-gray-400 rounded w-full">
+        <p class="font-medium"> <span class="text-xl font-bold mr-2">Q.</span>{{ question.question_text }}</p>
+        <div class="ml-8">
+          <a href="{% url 'polls:detail' question.id%}" class="no-underline inline-block px-2 py-1 mt-2 rounded text-xs font-bold bg-blue-500 hover:bg-blue-600 focus:bg-blue-600 text-white uppercase tracking-wide">Vote Now</a>
+          <a  href="{% url 'polls:results' question.id%}" class="no-underline inline-block px-2 py-1 ml-2 rounded text-xs font-bold bg-gray-300 hover:bg-gray-400 focus:bg-gray-400 text-gray-800 uppercase tracking-wide">Results</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No polls</p>
+{% endif%}
+</div>
+{% endblock %}
